@@ -24,6 +24,9 @@ def read_phonelist():
     conn.close()
     return rows
 
+def insert_contact(name, phone, address, city, email):
+    return "Contact added"
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -42,7 +45,9 @@ def insert_page():
     if request.method =='POST':
         name=request.form['name']
         phone=request.form['phone']
-        return render_template('insert.html', req=insert_contact(name,
-        phone, address, city, email))
+        address = request.form['address']
+        city = request.form['city']
+        email = request.form['email']
+        return render_template('insert.html', req=insert_contact(name, phone, address, city, email))
     else: # GET method
         return render_template('list.html', list=read_phonelist())
