@@ -3,13 +3,13 @@ import datetime
 import psycopg2
 
 def get_db_connection():
-   conn = psycopg2.connect(
-      host="localhost",
-      port="5432", # Usually port number 5432 for PostgreSQL
-      database="phonedb",
-      user="postgres",
-      password="88h75243") # Change to your own pgAdmin postgres userpassword
-   return conn
+    conn = psycopg2.connect(
+        host="localhost",
+        port="5432", # Usually port number 5432 for PostgreSQL
+        database="phonedb",
+        user="postgres",
+        password="88h75243") # Change to your own pgAdmin postgres userpassword
+    return conn
 
 simple = [
   ['arne', '013-131313'], ['berith','01234'], ['caesar','077-1212321']
