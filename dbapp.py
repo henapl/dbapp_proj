@@ -22,7 +22,7 @@ def read_phonelist():
     rows = cur.fetchall()
     cur.close()
     conn.close()
-    return rows
+    return simple
 
 def insert_contact(name, phone, address, city, email):
     return "Contact added"
