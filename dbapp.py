@@ -22,10 +22,26 @@ def read_phonelist():
     rows = cur.fetchall()
     cur.close()
     conn.close()
-    return simple
+    return rows
 
 def insert_contact(name, phone, address, city, email):
-    return "Contact added"
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("INSERT INTO phonelist (name, phone, address, city, email) VALUES (%s, %s, %s, %s, %s);",
+        (name, phone, address, city, email))
+    cur.execute("COMMIT;")
+    cur.close()
+    conn.close()
+    return f"{name} with {phone} added"
+
+def delete_contact(id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute(f"DELETE FROM phonelist WHERE id = '{id}';")
+    cur.execute("COMMIT;")
+    cur.close()
+    conn.close()
+    return f"Removed row with id {id}"
 
 app = Flask(__name__)
 
@@ -51,3 +67,5 @@ def insert_page():
         return render_template('insert.html', req=insert_contact(name, phone, address, city, email))
     else: # GET method
         return render_template('list.html', list=read_phonelist())
+    
+#@app.route("/delete", methods = )
