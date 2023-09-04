@@ -4,6 +4,8 @@ import datetime
 simple = [
   ['arne', '013-131313'], ['berith','01234'], ['caesar','077-1212321']
 ]
+def read_phonelist():
+ return simple
 
 app = Flask(__name__)
 
