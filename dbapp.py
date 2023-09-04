@@ -1,11 +1,28 @@
 from flask import Flask, render_template, request
 import datetime
+import psycopg2
+
+def get_db_connection():
+   conn = psycopg2.connect(
+      host="localhost",
+      port="5432", # Usually port number 5432 for PostgreSQL
+      database="phonedb",
+      user="postgres",
+      password="88h75243") # Change to your own pgAdmin postgres userpassword
+   return conn
 
 simple = [
   ['arne', '013-131313'], ['berith','01234'], ['caesar','077-1212321']
 ]
+
 def read_phonelist():
- return simple
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM phonelist;")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
 
 app = Flask(__name__)
 
